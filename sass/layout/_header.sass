@@ -1,66 +1,161 @@
 @use '../abstracts/_variables' as *
 @use '../abstracts/_mixins' as *
-@use '../abstracts/_breakpoints' as *
-@use '../abstracts/_breakpoints' as *
+@import '../abstracts/_breakpoints.scss'
 
-nav
-    max-width: 100vw
-    height: 10vh
-    background: $background 
-    -webkit-background: $background
-    display: flex
-    justify-content: space-around
-    align-items: center
+header
+    @include media('<=phone')
+        .nav-list
+            position: absolute
+            z-index: 10
+            top: 10vh
+            right: 0
+            width: 50vw 
+            height: 90vh 
+            background: $border
+            flex-direction: column
+            align-items: center
+            justify-content: space-around
+            transform: translateX(100%)
+            transition: transform 0.3s ease-in
+            li
+                margin-left: 0 
+                opacity: 0
+                z-index: 10
+        .mobile-menu
+            display: block !important        
+        
+        .container-header
+            width: 100%
+            display: flex
+            justify-content: center
+            align-items: center
+            flex-direction: column-reverse
+            z-index: 1
 
-    .logo
+            .header-frase
+                    background:$card-color
+                    position: relative
+                    top: -10px
+                    left: 15px
+                    width: 70%
+                    height: 50%
+                    border-radius: 20px
+                    box-shadow: 0px 0px 0 10px $title
+                    
+                    display: flex
+                    justify-content: center
+                    align-items: center
+
+                    p
+                        font-style: normal
+                        font-size: 1.9rem
+                        font-weight: 600
+                        text-transform: uppercase
+                        text-align: center
+
+            .header-content
+                position: relative
+                .header-imgLogo
+                    background: $card-color
+                    height: 100px
+                    position: relative
+                    top: auto
+                    left: -15px
+                    box-shadow: 0 0 0 10px $title 
+                    border-radius: 20px
+                    img
+                        height: 100px    
+                .header-imgAluno
+                    display: none 
+                
+    nav
+        max-width: 100vw
+        height: 10vh
+        background: $background 
+        -webkit-background: $background
         display: flex
-        justify-content: center
+        justify-content: space-around
         align-items: center
-        img
-            width: 150px
 
-    .nav-list
-        list-style: none
-        display: flex
-        li
-            letter-spacing: 3px
-            margin-left: 32px
-            a
-                color: $links
-                text-transform: uppercase
-                font-weight: 600
-                cursor: pointer
-                &:hover
-                    border-bottom: 3px solid #fff
+        .logo
+            display: flex
+            justify-content: center
+            align-items: center
+            img
+                width: 150px
 
-    .nav-list.active
-        transform: translateX(0)
-    
-    @keyframes navLinkFade
-        from     
-          opacity: 0  
-          transform: translateX(50px)
-        to
-            opacity: 1
+        .nav-list
+            list-style: none
+            display: flex
+            li
+                letter-spacing: 3px
+                margin-left: 32px
+                a
+                    color: $links
+                    text-transform: uppercase
+                    font-weight: 600
+                    cursor: pointer
+                    &:hover
+                        border-bottom: 3px solid #fff
+
+        .nav-list.active
             transform: translateX(0)
 
-    .mobile-menu
-        cursor: pointer
-        display: none
-        div
-            width: 32px
-            height: 2px
-            background: #fff
-            margin: 8px
-    
-        &.active .line-1
-            transform: rotate(-45deg) translate(-8px,8px)
-        &.active .line-2
-            opacity: 0
-        &.active .line-3
-            transform: rotate(45deg) translate(-5px,-7px)
+        @keyframes navLinkFade
+            from     
+              opacity: 0  
+              transform: translateX(50px)
+            to
+                opacity: 1
+                transform: translateX(0)
 
-.container-header
-    @include responsiveContent
-    height: 100vh
-    background: $border
+        .mobile-menu
+            cursor: pointer
+            display: none
+            div
+                width: 32px
+                height: 2px
+                background: #fff
+                margin: 8px
+
+            &.active .line-1
+                transform: rotate(-45deg) translate(-8px,8px)
+            &.active .line-2
+                opacity: 0
+            &.active .line-3
+                transform: rotate(45deg) translate(-5px,-7px)
+
+    .container-header
+        @include responsiveContent
+        height: 100vh
+        background: $border
+        position: relative
+        .header-frase
+            position: absolute
+            top: 180px
+            left: 170px
+            font-size: 25px
+            text-transform: uppercase
+        .header-content
+            display: grid
+            grid-template-columns: 1fr 1fr
+            grid-template-rows: 1fr 1fr 1fr
+            height: 100%
+            width: 100%
+            .header-imgLogo
+                grid-column-start: 1
+                grid-row-start: 2
+
+                img
+                    margin-left: 200px
+                    height: 210px
+
+            .header-imgAluno
+                grid-column-start: 2
+                grid-row-start: 1
+                grid-row-end: 4
+                display: flex
+                align-items: flex-end
+                justify-content: center
+                img
+                    height: 500px
